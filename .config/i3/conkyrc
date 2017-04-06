@@ -1,0 +1,24 @@
+background        no
+out_to_console 	  yes
+out_to_x	  no
+update_interval	  2
+total_run_times	  0
+short_units	  yes
+pad_percents	  3
+
+override_utf8_locale yes
+
+TEXT
+,[
+  {"full_text": " ❤ [${cpu cpu1}% ${cpu cpu2}% ${cpu cpu3}% ${cpu cpu4}%]", "color": "\#DC322F"},
+  {"full_text": " ⚡ [${freq_g 1}GHz ${freq_g 2}GHz ${freq_g 3}GHz ${freq_g 4}GHz]", "color": "\#D8D02F"},
+  {"full_text": " ❄ [${exec sensors | grep 'Core 0' | cut -c18-24} ${exec sensors | grep 'Core 1' | cut -c18-24} ${exec sensors | grep 'Core 2' | cut -c18-24} ${exec sensors | grep 'Core 3' | cut -c18-24}]", "color": "\#1BC46D"},
+  {"full_text": " ≣ [$membar] ", "color":"\#B58900"},
+  ${if_up wlp0s29u1u6}{"full_text": " ≈ ${wireless_essid wlp0s29u1u6} [${wireless_link_qual_perc wlp0s29u1u6}%] ","color":"\#33CC99"},
+  $else${if_up ppp0}{"full_text": " ≈ orange ","color":"\#33CC99"},
+  $else${if_up enp5s0}{"full_text": " ≈ eth0 ","color":"\#33CC99"},
+  $else{"full_text": " ≈ no connection ","color":"\#33CC99"},$endif$endif$endif
+  {"full_text": " ${time %a %d %b}"},
+  {"full_text": " ${time %H:%M} "}
+]
+
